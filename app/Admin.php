@@ -65,6 +65,8 @@ class Admin extends Base {
 		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/admin{$min}.css", OPTION_AUTOLOAD_MANAGER ), '', $this->version, 'all' );
 
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/admin{$min}.js", OPTION_AUTOLOAD_MANAGER ), [ 'jquery' ], $this->version, true );
+
+		wp_enqueue_script( 'infiniteScrolling', 'https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js', [ 'jquery' ], $this->version, true );
 	}
 
 	public function footer_text( $text ) {

@@ -188,6 +188,7 @@ final class Plugin {
 		 * AJAX related hooks
 		 */
 		$ajax = new App\AJAX( $this->plugin );
+		// $ajax->action( 'change_autoload_status', 'change_autoload_status' );
 	}
 
 	/**
