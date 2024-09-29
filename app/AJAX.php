@@ -34,7 +34,7 @@ class AJAX extends Base {
 	public function change_autoload_status(){
 		$response = [
 			'status'	=> 0,
-			'message'	=> __( 'Unauthorized', 'user-switcher' ),
+			'message'	=> __( 'Unauthorized', 'option-autoload-manager' ),
 		];
 
 		if( ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
@@ -53,8 +53,12 @@ class AJAX extends Base {
 	        ['%d']  
 	    );
 
+	    $response = [
+			'status'	=> 1,
+			'message'	=> __( 'Success', 'option-autoload-manager' ),
+		];
 
-		wp_send_json_success( 'success' );
+		wp_send_json_success( 'Success' );
 
 
 

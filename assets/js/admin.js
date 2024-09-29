@@ -17,6 +17,7 @@ jQuery(function($){
         var data_id = submitButton.data('id'); 
         var radioName = 'action_' + data_id; 
         var radioValue = $(this).find('input[name="' + radioName + '"]:checked').val();
+        oam_modal();
 
         $.ajax({
             url: OPTION_AUTOLOAD_MANAGER.ajaxurl, 
@@ -28,7 +29,13 @@ jQuery(function($){
                 status: radioValue,
             },
             success: function(response) {
-                console.log('Response:', response);
+                var $targetRow = $('.oam-id[data-id="' + data_id + '"]');
+                if ( radioValue == 1 ) {
+                	$targetRow.find('.oam-autoload_status').text('on');
+                }else if(radioValue == 0){
+                	$targetRow.find('.oam-autoload_status').text('off');
+               	}
+               	oam_modal(false);
             },
             error: function(error) {
                 console.error('Error:', error);

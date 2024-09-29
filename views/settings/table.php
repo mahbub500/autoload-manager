@@ -27,11 +27,11 @@ if ($results) {
         $on_checked = ($autoload_status === 'on' || $autoload_status === 'auto') ? 'checked' : '';
         $off_checked = ($autoload_status !== 'on' && $autoload_status !== 'auto') ? 'checked' : '';
 
-        echo '<tr class="post">';
-        echo '<td class="oam-id" data-id="' . esc_html($row->option_id) . '">' . esc_html($row->option_id) . '</td>';
+        echo '<tr class="oam-id" data-id="' . esc_html($row->option_id) . '">';
+        echo '<td>' . esc_html($row->option_id) . '</td>';
         echo '<td>' . esc_html(substr($row->option_name, 0, 20)) . '</td>';
         echo '<td>' . esc_html(substr($row->option_value, 0, 20)) . '</td>';
-        echo '<td>' . esc_html($autoload_status) . '</td>';
+        echo '<td class="oam-autoload_status">' . esc_html($autoload_status) . '</td>';
         echo '<td>
                 <label><input type="radio" name="' . $radio_name . '" value="1" ' . $on_checked . '> On</label>
                 <label><input type="radio" name="' . $radio_name . '" value="0" ' . $off_checked . '> Off</label>
