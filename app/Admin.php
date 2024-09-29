@@ -67,6 +67,12 @@ class Admin extends Base {
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/admin{$min}.js", OPTION_AUTOLOAD_MANAGER ), [ 'jquery' ], $this->version, true );
 
 		wp_enqueue_script( 'infiniteScrolling', 'https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js', [ 'jquery' ], $this->version, true );
+
+		$localized = [
+			'ajaxurl'	=> admin_url( 'admin-ajax.php' ),
+			'_wpnonce'	=> wp_create_nonce(),
+		];
+		wp_localize_script( $this->slug, 'OPTION_AUTOLOAD_MANAGER', apply_filters( "{$this->slug}-localized", $localized ) );
 	}
 
 	public function footer_text( $text ) {
