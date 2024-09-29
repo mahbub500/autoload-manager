@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage Admin
- * @author Codexpert <hi@codexpert.io>
+ * @author Mahbub mahbubmr500@gmail.com
  */
 class Admin extends Base {
 

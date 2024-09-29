@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage Front
- * @author Codexpert <hi@codexpert.io>
+ * @author Mahbub mahbubmr500@gmail.com
  */
 class Front extends Base {
 

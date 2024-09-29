@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Main class for the plugin
  * @package Plugin
- * @author Codexpert <hi@codexpert.io>
+ * @author Mahbub mahbubmr500@gmail.com
  */
 final class Plugin {
 	
