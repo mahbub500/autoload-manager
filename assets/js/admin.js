@@ -46,11 +46,5 @@ jQuery(function($){
 	    });
 	});
 
-
-	// $('.oam-container').infiniteScroll({
-
-	//   path: '.pagination__next',
-	//   append: '.post',
-	//   history: false,
-	// });
+	 let table = new DataTable('#oam-container');
 })

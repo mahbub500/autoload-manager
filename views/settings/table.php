@@ -7,16 +7,16 @@ $query = "SELECT * FROM $table_name";
 $results = $wpdb->get_results($query);
 
 if ($results) {
-    echo '<div class="oam-container">';
+    echo '<div >';
     echo '<form class="oam-form" method="post">';
-    echo '<table class="wp-list-table widefat fixed striped">';
+    echo '<table id="oam-container" class="wp-list-table widefat fixed striped">';
     echo '<thead>';
     echo '<tr>';
-    echo '<th>' . __( 'Option ID', 'user-switcher' ) . '</th>';
-    echo '<th>' . __( 'Option Name', 'user-switcher' ) . '</th>';
-    echo '<th>' . __( 'Option Value', 'user-switcher' ) . '</th>';
-    echo '<th>' . __( 'Autoload Status', 'user-switcher' ) . '</th>';
-    echo '<th>' . __( 'Action', 'user-switcher' ) . '</th>';
+    echo '<th>' . __( 'Option ID', 'option-autoload-manager' ) . '</th>';
+    echo '<th>' . __( 'Option Name', 'option-autoload-manager' ) . '</th>';
+    echo '<th>' . __( 'Option Value', 'option-autoload-manager' ) . '</th>';
+    echo '<th>' . __( 'Autoload Status', 'option-autoload-manager' ) . '</th>';
+    echo '<th>' . __( 'Action', 'option-autoload-manager' ) . '</th>';
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
