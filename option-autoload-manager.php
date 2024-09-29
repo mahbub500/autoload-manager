@@ -143,14 +143,6 @@ final class Plugin {
 			$settings = new App\Settings( $this->plugin );
 			$settings->action( 'plugins_loaded', 'init_menu' );
 
-			/**
-			 * Renders different notices
-			 * 
-			 * @package Codexpert\Plugin
-			 * 
-			 * @author Codexpert <hi@codexpert.io>
-			 */
-			$notice = new Notice( $this->plugin );
 
 		else : // ! is_admin() ?
 
@@ -160,29 +152,9 @@ final class Plugin {
 			$front = new App\Front( $this->plugin );
 			$front->action( 'wp_head', 'head' );
 			$front->action( 'wp_footer', 'modal' );
-			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
-
-			/**
-			 * Shortcode related hooks
-			 */
-			$shortcode = new App\Shortcode( $this->plugin );
-			$shortcode->register( 'my_shortcode', 'my_shortcode' );
+			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );			
 
 		endif;
-
-		/**
-		 * Cron facing hooks
-		 */
-		$cron = new App\Cron( $this->plugin );
-		$cron->activate( 'install' );
-		$cron->deactivate( 'uninstall' );
-
-		/**
-		 * Common hooks
-		 *
-		 * Executes on both the admin area and front area
-		 */
-		$common = new App\Common( $this->plugin );
 
 		/**
 		 * AJAX related hooks
