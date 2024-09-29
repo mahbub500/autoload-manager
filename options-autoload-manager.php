@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Option Autoload Manager
+ * Plugin Name: Options Autoload Manager
  * Description: Any user can turn on or turn off auto load in option data
  * Plugin URI: https://codexpert.io
  * Author: Codexpert, Inc

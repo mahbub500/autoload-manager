@@ -52,7 +52,7 @@ class Settings extends Base {
 				
 				'option-autoload-manager_table' => [
 					'id'        => 'option-autoload-manager_table',
-					'label'     => __( 'Table', 'option-autoload-manager' ),
+					'label'     => __( 'Autoload Manager', 'option-autoload-manager' ),
 					'icon'      => 'dashicons-editor-table',
 					// 'color'		=> '#28c9ee',
 					'hide_form'	=> true,
