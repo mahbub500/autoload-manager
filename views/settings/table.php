@@ -35,7 +35,7 @@ if ($results) {
         echo '<td>
                 <label><input type="radio" name="' . $radio_name . '" value="1" ' . $on_checked . '> On</label>
                 <label><input type="radio" name="' . $radio_name . '" value="0" ' . $off_checked . '> Off</label>
-                <input type="submit" value="Submit" class="btn btn-primary" data-id="' . esc_html($row->option_id) . '">
+                <input type="submit" value="Submit" class="oam-submit-button" data-id="' . esc_html($row->option_id) . '">
               </td>';
         echo '</tr>';
     }

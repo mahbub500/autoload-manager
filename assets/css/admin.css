@@ -14,3 +14,28 @@
 #option-autoload-manager-modal-loader {
     position: absolute;
 }
+
+.oam-submit-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 8px;
+
+}
+
+.oam-submit-button:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+.oam-submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
