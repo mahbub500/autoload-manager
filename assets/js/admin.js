@@ -7,44 +7,38 @@ let oam_modal = ( show = true ) => {
 	}
 }
 
-jQuery(function($){
+jQuery(function($){	
 
-	 $(document).ready(function() {
-	    $('.oam-form').on('submit', function(e) {
-	    e.preventDefault(); 
-	        
-        var submitButton = $(this).find('input[type="submit"]:focus');
-        var data_id = submitButton.data('id'); 
-        var radioName = 'action_' + data_id; 
-        var radioValue = $(this).find('input[name="' + radioName + '"]:checked').val();
-        oam_modal();
+    $(document).ready(function() {
+        $('input[type="checkbox"]').change(function() {
+            var $this = $(this);
+            var $parentRow = $this.closest('tr.oam-id'); 
+            var dataId = $parentRow.data('id'); 
 
-        $.ajax({
-            url: OPTION_AUTOLOAD_MANAGER.ajaxurl, 
-            type: 'POST',
-            data: {
-                action: 'update-autoload-status', 
-                _wpnonce : OPTION_AUTOLOAD_MANAGER._wpnonce,
-                id: data_id,
-                status: radioValue,
-            },
-            success: function(response) {
-                var $targetRow = $('.oam-id[data-id="' + data_id + '"]');
-                if ( radioValue == 1 ) {
-                	$targetRow.find('.oam-autoload_status').text('on');
-                }else if(radioValue == 0){
-                	$targetRow.find('.oam-autoload_status').text('off');
-               	}
-               	oam_modal(false);
-            },
-            error: function(error) {
-                console.error('Error:', error);
-            }
+            var isChecked = $this.is(':checked'); 
+
+            console.log('Checkbox ID:', dataId);
+            console.log('Is checked:', isChecked);
+
+           
+            $.ajax({
+                url: OPTION_AUTOLOAD_MANAGER.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'update-autoload-status',
+                    _wpnonce: OPTION_AUTOLOAD_MANAGER._wpnonce,
+                    id: dataId,
+                    status: isChecked ? '1' : '0',  
+                },
+                success: function(response) {
+                   
+                    $parentRow.find('.oam-autoload_status').text(isChecked ? 'on' : 'off');
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                }
+            });
         });
-
-
-	    });
-	});
-
-	 let table = new DataTable('#oam-container');
+    });
+    let table = new DataTable('#oam-container');
 })
