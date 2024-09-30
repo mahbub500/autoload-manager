@@ -17,8 +17,8 @@ if ($results) {
     echo '<button type="button" class="oam-filter" data-filter="on">' . __( 'On', 'option-autoload-manager' ) . '</button>';
     echo '<button type="button" class="oam-filter" data-filter="off">' . __( 'Off', 'option-autoload-manager' ) . '</button>';
     echo '</div>';
-    // Add Bulk Update Button
-    echo '<button type="submit" name="bulk_update" class="button button-primary oam-bulk-update">Bulk Update</button>';
+    // Add Bulk OFF Button
+    echo '<button type="submit" name="bulk_update" class="button button-primary oam-bulk-update">Bulk OFF</button>';
     
     echo '<form class="oam-form" method="post">';
     echo '<table id="oam-container" class="wp-list-table widefat fixed striped">';
@@ -59,8 +59,8 @@ if ($results) {
     echo '</tbody>';
     echo '</table>';
     
-    // Add Bulk Update Button
-    echo '<button type="submit" name="bulk_update" class="button button-primary oam-bulk-update">Bulk Update</button>';
+    // Add Bulk OFF Button
+    echo '<button type="submit" name="bulk_update" class="button button-primary oam-bulk-update">Bulk OFF</button>';
 
     echo '</form>';
     echo '</div>';

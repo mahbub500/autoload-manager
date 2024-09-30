@@ -31,10 +31,7 @@ class Front extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
-	public function head() {
-		// $status = update_option_auto_status( 1, 0 );
-		// Helper::pri( $status );
-	}
+	public function head() {}
 	
 	/**
 	 * Enqueue JavaScripts and stylesheets
