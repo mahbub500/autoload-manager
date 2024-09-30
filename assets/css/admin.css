@@ -41,20 +41,20 @@
 }
 
 /* Switch CSS */
-.switch {
+.oam-switch {
   position: relative;
   display: inline-block;
   width: 40px;
   height: 20px;
 }
 
-.switch input {
+.oam-switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.slider {
+.oam-slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -66,7 +66,7 @@
   border-radius: 20px;
 }
 
-.slider:before {
+.oam-slider:before {
   position: absolute;
   content: "";
   height: 16px;
@@ -78,10 +78,10 @@
   border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked + .oam-slider {
   background-color: #4CAF50;
 }
 
-input:checked + .slider:before {
+input:checked + .oam-slider:before {
   transform: translateX(20px);
 }

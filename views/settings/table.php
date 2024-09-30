@@ -33,9 +33,9 @@ if ($results) {
         echo '<td>' . esc_html(substr($row->option_value, 0, 20)) . '</td>';
         echo '<td class="oam-autoload_status">' . esc_html($autoload_status) . '</td>';
         echo '<td>
-                <label class="switch">
+                <label class="oam-switch">
                     <input type="checkbox" name="' . $switch_name . '" value="1" ' . $checked . '>
-                    <span class="slider round"></span>
+                    <span class="oam-slider oam-round"></span>
                 </label>
               </td>';
         echo '</tr>';
