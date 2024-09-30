@@ -40,18 +40,38 @@ class AJAX extends Base {
 		if( ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
 			wp_send_json_success( $response );
 		}
-		global $wpdb;
 
-	    $id = intval($_POST['id']);
+	    $id 	= intval($_POST['id']);
 	    $status = intval($_POST['status']);
 
-	    $result = $wpdb->update(
-	        $wpdb->prefix . 'options',
-	        ['autoload' => $status ? 'on' : 'off'], 
-	        ['option_id' => $id],
-	        ['%s'], 
-	        ['%d']  
-	    );
+	    update_option_auto_status( $id, $status );
+
+	   
+	    $response = [
+			'status'	=> 1,
+			'message'	=> __( 'Success', 'option-autoload-manager' ),
+		];
+
+		wp_send_json_success( 'Success' );
+	}
+
+	public function bulk_update(){
+		$response = [
+			'status'	=> 0,
+			'message'	=> __( 'Unauthorized', 'option-autoload-manager' ),
+		];
+
+		if( ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+			wp_send_json_success( $response );
+		}		
+
+	    $ids 	= intval($_POST['id']);
+	    $status = 1;
+
+	    foreach ( $ids as $key => $id ) {
+	    	update_option_auto_status( $id, $status );
+	    }
+
 
 	    $response = [
 			'status'	=> 1,
@@ -59,9 +79,6 @@ class AJAX extends Base {
 		];
 
 		wp_send_json_success( 'Success' );
-
-
-
 	}
 
 

@@ -17,3 +17,30 @@ function oam_site_url() {
 	return $url;
 }
 endif;
+
+/**
+ * Update wp_options autoload column  
+ */
+if ( ! function_exists( 'update_option_auto_status' ) ) :
+function update_option_auto_status( $id, $status ) {
+    global $wpdb;
+
+    // Ensure status is boolean
+    $autoload_status = $status ? 'on' : 'off';
+
+    // Perform the update
+    $result = $wpdb->update(
+        $wpdb->prefix . 'options',
+        ['autoload' => $autoload_status], 
+        ['option_id' => $id],
+        ['%s'], // Data format for autoload
+        ['%d']  // Data format for option_id
+    );
+
+    // Return the result (number of rows affected)
+    return $result; // This will return the number of rows updated or false on error
+}
+endif;
+
+
+	   

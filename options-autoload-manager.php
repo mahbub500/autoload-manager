@@ -161,6 +161,7 @@ final class Plugin {
 		 */
 		$ajax = new App\AJAX( $this->plugin );
 		$ajax->priv( 'update-autoload-status', 'change_autoload_status' );
+		$ajax->priv( 'oam-bulk-update', 'bulk_update' );
 	}
 
 	/**
