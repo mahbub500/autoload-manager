@@ -17,8 +17,6 @@ if ( $results === false ) {
     set_transient($transient_key, $results, $expiration_time);
 }
 
-
-
 if ($results) {
     echo '<div >';
 
@@ -29,7 +27,12 @@ if ($results) {
     echo '<button type="button" class="oam-filter" data-filter="off">' . __( 'Off', 'option-autoload-manager' ) . '</button>';
     echo '</div>';
     // Add Bulk OFF Button
+
+    echo '<div class="oem-search-fleld">';
     echo '<button type="submit" name="bulk_update" class="button button-primary oam-bulk-update">Bulk OFF</button>';
+    echo '<input id="oem-search" type="text" placeholder="Search..">';
+
+    echo '</div>';
     
     echo '<form class="oam-form" method="post">';
     echo '<table id="oam-container" class="wp-list-table widefat fixed striped">';

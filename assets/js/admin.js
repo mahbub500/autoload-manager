@@ -78,7 +78,7 @@ jQuery(function($){
             selectedIds.push( id );
         });
 
-        // if (confirm("Are you want to turn off all selectd item?")) {
+        if (confirm("Are you want to turn off autoload all selectd item?")) {
             $.ajax({
                 url: OPTION_AUTOLOAD_MANAGER.ajaxurl,
                 type: 'POST',
@@ -98,7 +98,14 @@ jQuery(function($){
                     console.error('Error:', error);
                 }
             });
-        // }         
+        }         
+    });
+
+    $("#oem-search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#oam-container tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
     });
 
 
