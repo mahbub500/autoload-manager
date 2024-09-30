@@ -18,7 +18,7 @@ if ($results) {
     echo '<button type="button" class="oam-filter" data-filter="off">' . __( 'Off', 'option-autoload-manager' ) . '</button>';
     echo '</div>';
     // Add Bulk Update Button
-    echo '<button type="submit" name="bulk_update" class="button button-primary">Bulk Update</button>';
+    echo '<button type="submit" name="bulk_update" class="button button-primary oam-bulk-update">Bulk Update</button>';
     
     echo '<form class="oam-form" method="post">';
     echo '<table id="oam-container" class="wp-list-table widefat fixed striped">';
@@ -49,7 +49,7 @@ if ($results) {
         echo '<td class="oam-autoload_status">' . esc_html($autoload_status) . '</td>';
         echo '<td>
                 <label class="oam-switch">
-                    <input type="checkbox" name="switches[' . esc_html($row->option_id) . ']" value="1" ' . $checked . '>
+                    <input type="checkbox" class="oam-checkbox" name="switches[' . esc_html($row->option_id) . ']" value="1" ' . $checked . '>
                     <span class="oam-slider oam-round"></span>
                 </label>
               </td>';
@@ -60,7 +60,7 @@ if ($results) {
     echo '</table>';
     
     // Add Bulk Update Button
-    echo '<button type="submit" name="bulk_update" class="button button-primary">Bulk Update</button>';
+    echo '<button type="submit" name="bulk_update" class="button button-primary oam-bulk-update">Bulk Update</button>';
 
     echo '</form>';
     echo '</div>';

@@ -1,19 +1,19 @@
 let oam_modal = ( show = true ) => {
-	if(show) {
-		jQuery('#option-autoload-manager-modal').show();
-	}
-	else {
-		jQuery('#option-autoload-manager-modal').hide();
-	}
+    if(show) {
+        jQuery('#option-autoload-manager-modal').show();
+    }
+    else {
+        jQuery('#option-autoload-manager-modal').hide();
+    }
 }
 
-jQuery(function($){	
+jQuery(function($){ 
 
     var rows = $('.oam-id');
     rows.hide().filter('.oam-status-on').show();
 
     $(document).ready(function() {
-        $('input[type="checkbox"]').change(function(e) {
+        $('.oam-checkbox').change(function(e) {
             e.preventDefault();
             var $this = $(this);
             var $parentRow = $this.closest('tr.oam-id'); 
@@ -21,7 +21,7 @@ jQuery(function($){
 
             var isChecked = $this.is(':checked'); 
 
-            console.log( dataId );
+            // console.log( dataId );
            
             $.ajax({
                 url: OPTION_AUTOLOAD_MANAGER.ajaxurl,
@@ -73,6 +73,18 @@ jQuery(function($){
         if ($('.select-row:checked').length === $('.select-row').length) {
             $('#select-all').prop('checked', true);
         }
+    });
+
+     $('.oam-bulk-update').on('click', function() {
+        var selectedIds = [];
+        
+        $('.select-row:checked').each(function() {
+            var id = $(this).closest('tr').data('id');
+            selectedIds.push(id);
+        });
+
+        console.log('Selected IDs:', selectedIds);
+        
     });
 
 
