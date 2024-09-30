@@ -17,12 +17,14 @@ if ($results) {
     echo '<button type="button" class="oam-filter" data-filter="on">' . __( 'On', 'option-autoload-manager' ) . '</button>';
     echo '<button type="button" class="oam-filter" data-filter="off">' . __( 'Off', 'option-autoload-manager' ) . '</button>';
     echo '</div>';
+    // Add Bulk Update Button
+    echo '<button type="submit" name="bulk_update" class="button button-primary">Bulk Update</button>';
     
-
     echo '<form class="oam-form" method="post">';
     echo '<table id="oam-container" class="wp-list-table widefat fixed striped">';
     echo '<thead>';
     echo '<tr>';
+    echo '<th><input type="checkbox" id="select-all" /></th>'; // Select All Checkbox
     echo '<th>' . __( 'Option ID', 'option-autoload-manager' ) . '</th>';
     echo '<th>' . __( 'Option Name', 'option-autoload-manager' ) . '</th>';
     echo '<th>' . __( 'Option Value', 'option-autoload-manager' ) . '</th>';
@@ -37,30 +39,29 @@ if ($results) {
         $autoload_status = esc_html($row->autoload);
         $checked = ($autoload_status === 'on' || $autoload_status === 'auto') ? 'checked' : '';
 
-        // Helper::pri( $autoload_status );
-        $css = '';
-        if ( $autoload_status == 'on'  || $autoload_status == 'auto'  ) {
-            $css = 'oam-status-on';
-        }else{
-            $css = 'oam-status-off';
-        }
+        $css = ($autoload_status == 'on' || $autoload_status == 'auto') ? 'oam-status-on' : 'oam-status-off';
 
-        echo '<tr  class="oam-id '. $css .'" data-id="'. esc_html( $row->option_id ) . '">';
+        echo '<tr class="oam-id ' . $css . '" data-id="' . esc_html($row->option_id) . '">';
+        echo '<td><input type="checkbox" class="select-row" name="switches[' . esc_html($row->option_id) . ']" value="1" ></td>'; // Individual Checkbox
         echo '<td>' . esc_html($row->option_id) . '</td>';
         echo '<td>' . esc_html(substr($row->option_name, 0, 20)) . '</td>';
         echo '<td>' . esc_html(substr($row->option_value, 0, 20)) . '</td>';
-        echo '<td class="oam-autoload_status ">' . esc_html($autoload_status) . '</td>';
-        echo '<td>               
-              <label class="oam-switch">
-                <input type="checkbox" name="' . $switch_name . '" value="1" ' . $checked . ' id="switch_' . esc_html($row->option_id) . '">
-                <span class="oam-slider oam-round"></span>
-              </label>
+        echo '<td class="oam-autoload_status">' . esc_html($autoload_status) . '</td>';
+        echo '<td>
+                <label class="oam-switch">
+                    <input type="checkbox" name="switches[' . esc_html($row->option_id) . ']" value="1" ' . $checked . '>
+                    <span class="oam-slider oam-round"></span>
+                </label>
               </td>';
         echo '</tr>';
     }
 
     echo '</tbody>';
     echo '</table>';
+    
+    // Add Bulk Update Button
+    echo '<button type="submit" name="bulk_update" class="button button-primary">Bulk Update</button>';
+
     echo '</form>';
     echo '</div>';
 } else {

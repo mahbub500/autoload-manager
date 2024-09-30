@@ -20,6 +20,8 @@ jQuery(function($){
             var dataId = $parentRow.data('id'); 
 
             var isChecked = $this.is(':checked'); 
+
+            console.log( dataId );
            
             $.ajax({
                 url: OPTION_AUTOLOAD_MANAGER.ajaxurl,
@@ -43,8 +45,6 @@ jQuery(function($){
 
     $('.oam-filter').on('click', function() {
         var filter = $(this).data('filter');
-        
-        
         var rows = $('.oam-id');
         
         if (filter === 'all') {
@@ -56,6 +56,11 @@ jQuery(function($){
         else if (filter === 'off') {
             rows.hide().filter('.oam-status-off').show();
         }
+    });
+
+     $('#select-all').on('change', function() {
+        // Check/uncheck all the checkboxes in the table based on "Select All"
+        $('.select-row').prop('checked', this.checked);
     });
     // let table = new DataTable('#oam-container');
 })
