@@ -15,31 +15,6 @@
     position: absolute;
 }
 
-.oam-submit-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 8px;
-
-}
-
-.oam-submit-button:hover {
-    background-color: #45a049; /* Darker green */
-}
-
-.oam-submit-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
 /* Switch CSS */
 .oam-switch {
   position: relative;
@@ -84,4 +59,50 @@ input:checked + .oam-slider {
 
 input:checked + .oam-slider:before {
   transform: translateX(20px);
+}
+
+/*Button Design*/
+.oam-filter-buttons {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.oam-filter {
+    background-color: #0073aa; /* WordPress Blue */
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.oam-filter:hover {
+    background-color: #005d8a; /* Darker blue on hover */
+    transform: translateY(-2px);
+}
+
+.oam-filter:active {
+    background-color: #004166; /* Even darker blue on click */
+    transform: translateY(0);
+}
+
+.oam-filter:focus {
+    outline: none; /* Remove focus outline */
+}
+
+.oam-filter.active {
+    background-color: #ffb900; /* WordPress Yellow */
+    color: #333;
+}
+
+/* Optional: Add media queries for responsive design */
+@media (max-width: 600px) {
+    .oam-filter {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
 }

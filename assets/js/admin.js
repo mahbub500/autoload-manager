@@ -9,17 +9,17 @@ let oam_modal = ( show = true ) => {
 
 jQuery(function($){	
 
+    var rows = $('.oam-id');
+    rows.hide().filter('.oam-status-on').show();
+
     $(document).ready(function() {
-        $('input[type="checkbox"]').change(function() {
+        $('input[type="checkbox"]').change(function(e) {
+            e.preventDefault();
             var $this = $(this);
             var $parentRow = $this.closest('tr.oam-id'); 
             var dataId = $parentRow.data('id'); 
 
             var isChecked = $this.is(':checked'); 
-
-            console.log('Checkbox ID:', dataId);
-            console.log('Is checked:', isChecked);
-
            
             $.ajax({
                 url: OPTION_AUTOLOAD_MANAGER.ajaxurl,
@@ -40,5 +40,22 @@ jQuery(function($){
             });
         });
     });
-    let table = new DataTable('#oam-container');
+
+    $('.oam-filter').on('click', function() {
+        var filter = $(this).data('filter');
+        
+        
+        var rows = $('.oam-id');
+        
+        if (filter === 'all') {
+            rows.show();
+        } 
+        else if (filter === 'on') {
+            rows.hide().filter('.oam-status-on').show();
+        } 
+        else if (filter === 'off') {
+            rows.hide().filter('.oam-status-off').show();
+        }
+    });
+    // let table = new DataTable('#oam-container');
 })
