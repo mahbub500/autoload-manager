@@ -97,6 +97,9 @@ input:checked + .oam-slider:before {
     background-color: #ffb900; /* WordPress Yellow */
     color: #333;
 }
+.oam-bulk-update {
+    margin-bottom: 10px;
+}
 
 /* Optional: Add media queries for responsive design */
 @media (max-width: 600px) {

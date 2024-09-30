@@ -3,10 +3,21 @@
 use Codexpert\Option_Autoload_Manager\Helper;
 global $wpdb;
 
-$table_name = $wpdb->prefix . 'options'; 
+$table_name = $wpdb->prefix . 'options';
 
-$query = "SELECT * FROM $table_name";
-$results = $wpdb->get_results($query);
+$transient_key = 'cached_options_data';
+$expiration_time = 12 * HOUR_IN_SECONDS; 
+
+$results = get_transient( $transient_key );
+
+if ( $results === false ) {
+    $query = "SELECT * FROM $table_name";
+    $results = $wpdb->get_results($query);
+
+    set_transient($transient_key, $results, $expiration_time);
+}
+
+
 
 if ($results) {
     echo '<div >';
