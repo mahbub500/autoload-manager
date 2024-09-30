@@ -62,5 +62,20 @@ jQuery(function($){
         // Check/uncheck all the checkboxes in the table based on "Select All"
         $('.select-row').prop('checked', this.checked);
     });
+
+     $('.select-row').on('change', function() {
+        // If one of the checkboxes is unchecked, uncheck the "Select All" checkbox
+        if (!this.checked) {
+            $('#select-all').prop('checked', false);
+        }
+        
+        // If all checkboxes are checked, automatically check the "Select All" checkbox
+        if ($('.select-row:checked').length === $('.select-row').length) {
+            $('#select-all').prop('checked', true);
+        }
+    });
+
+
+
     // let table = new DataTable('#oam-container');
 })
