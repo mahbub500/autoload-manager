@@ -46,6 +46,8 @@ class AJAX extends Base {
 
 	    update_option_auto_status( $id, $status );
 
+	    clear_options_cache();
+
 	   
 	    $response = [
 			'status'	=> 1,
@@ -72,6 +74,8 @@ class AJAX extends Base {
 		$id = intval($id); 
 		update_option_auto_status( $id, $status );
 	}
+
+	clear_options_cache();
 
 	$response = [
 		'status'	=> 1,

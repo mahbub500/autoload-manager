@@ -42,4 +42,25 @@ function update_option_auto_status( $id, $status ) {
 endif;
 
 
+/**
+ * Function to clear the transient after updating the options table  
+ */
+if ( ! function_exists( 'clear_options_cache' ) ) :
+
+function clear_options_cache() {
+    global $wpdb;
+
+    $table_name = $wpdb->prefix . 'options';
+    $transient_key = 'cached_options_data';
+
+    delete_transient($transient_key);
+} 
+
+endif;
+
+
+
+
+
+
 	   
