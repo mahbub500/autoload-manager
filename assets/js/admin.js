@@ -78,7 +78,7 @@ jQuery(function($){
             selectedIds.push( id );
         });
 
-        if (confirm("Are you want to turn off autoload all selectd item?")) {
+        // if (confirm("Are you want to turn off autoload all selectd item?")) {
             $.ajax({
                 url: OPTION_AUTOLOAD_MANAGER.ajaxurl,
                 type: 'POST',
@@ -86,19 +86,18 @@ jQuery(function($){
                     action: 'oam-bulk-update',
                     _wpnonce: OPTION_AUTOLOAD_MANAGER._wpnonce,
                     id: selectedIds,
-                    status: 1,  
                 },
                 success: function(response) {
 
-                    console.log( response );
+
+                    location.reload();
                    
-                    // $parentRow.find('.oam-autoload_status').text(isChecked ? 'on' : 'off');
                 },
                 error: function(error) {
                     console.error('Error:', error);
                 }
             });
-        }         
+        // }         
     });
 
     $("#oem-search").on("keyup", function() {

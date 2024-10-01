@@ -8,14 +8,14 @@ $table_name = $wpdb->prefix . 'options';
 $transient_key = 'cached_options_data';
 $expiration_time = 12 * HOUR_IN_SECONDS; 
 
-$results = get_transient( $transient_key );
+// $results = get_transient( $transient_key );
 
-if ( $results === false ) {
+// if ( $results === false ) {
     $query = "SELECT * FROM $table_name";
     $results = $wpdb->get_results($query);
 
-    set_transient($transient_key, $results, $expiration_time);
-}
+    // set_transient($transient_key, $results, $expiration_time);
+// }
 
 if ($results) {
     echo '<div >';
