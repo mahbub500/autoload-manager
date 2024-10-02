@@ -3,8 +3,8 @@
  * Plugin Name: Options Autoload Manager
  * Description: Any user can turn on or turn off auto load in option data
  * Plugin URI: https://codexpert.io
- * Author: Codexpert, Inc
- * Author URI: https://codexpert.io
+ * Author: Mahbub
+ * Author URI: https://profiles.wordpress.org/mahbubmr500/
  * Version: 0.9
  * Text Domain: option-autoload-manager
  * Domain Path: /languages
