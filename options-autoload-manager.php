@@ -2,12 +2,14 @@
 /**
  * Plugin Name: Options Autoload Manager
  * Description: Any user can turn on or turn off auto load in option data
- * Plugin URI: https://codexpert.io
+ * Plugin URI: https://wordpress.org/plugins/option-autoload-manager/
  * Author: Mahbub
  * Author URI: https://profiles.wordpress.org/mahbubmr500/
  * Version: 0.9
  * Text Domain: option-autoload-manager
  * Domain Path: /languages
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 namespace Codexpert\Option_Autoload_Manager;
