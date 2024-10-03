@@ -5,7 +5,7 @@
  * Plugin URI: https://wordpress.org/plugins/option-autoload-manager/
  * Author: Mahbub
  * Author URI: https://profiles.wordpress.org/mahbubmr500/
- * Version: 0.9
+ * Version: 1.0.0
  * Text Domain: option-autoload-manager
  * Domain Path: /languages
  * License:           GPL v2 or later
