@@ -1,8 +1,6 @@
 <?php
-/**
- * All AJAX related functions
- */
-namespace Codexpert\Option_Autoload_Manager\App;
+namespace Codexpert\Options_Autoload_manager\App;
+
 use Codexpert\Plugin\Base;
 
 /**
@@ -15,74 +13,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage AJAX
- * @author Mahbub mahbubmr500@gmail.com
+ * @author Codexpert <hi@codexpert.io>
  */
 class AJAX extends Base {
 
 	public $plugin;
+	
+	public $slug;
+
+	public $name;
+
+	public $version;
 
 	/**
 	 * Constructor function
 	 */
-	public function __construct( $plugin ) {
-		$this->plugin	= $plugin;
+	public function __construct() {
+		$this->plugin	= OPTIONS_AUTOLOAD_MANAGER;
 		$this->slug		= $this->plugin['TextDomain'];
 		$this->name		= $this->plugin['Name'];
 		$this->version	= $this->plugin['Version'];
 	}
 
-	public function change_autoload_status(){
+	public function some_callback() {
+		
 		$response = [
 			'status'	=> 0,
-			'message'	=> __( 'Unauthorized', 'option-autoload-manager' ),
+			'message'	=> __( 'Unauthorized', 'options-autoload-manager' ),
 		];
 
 		if( ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
 			wp_send_json_success( $response );
 		}
-
-	    $id 	= intval($_POST['id']);
-	    $status = intval($_POST['status']);
-
-	    update_option_auto_status( $id, $status );
-
-	    clear_options_cache();
-
-	   
-	    $response = [
-			'status'	=> 1,
-			'message'	=> __( 'Single Status Change', 'option-autoload-manager' ),
-		];
-
-		wp_send_json_success( 'Success' );
 	}
-
-	public function bulk_update(){
-	$response = [
-		'status'	=> 0,
-		'message'	=> __( 'Unauthorized', 'option-autoload-manager' ),
-	];
-
-	if( ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
-		wp_send_json_success( $response );
-	}		
-
-	$ids = isset($_POST['id']) ? (array) $_POST['id'] : []; 
-	$status = 0;
-
-	foreach ( $ids as $id ) {
-		$id = intval($id); 
-		update_option_auto_status( $id, $status );
-	}
-
-	clear_options_cache();
-
-	$response = [
-		'status'	=> 1,
-		'message'	=> __( 'Bulk Update completed', 'option-autoload-manager' ),
-	];
-
-	wp_send_json_success( $response );
-}
 
 }

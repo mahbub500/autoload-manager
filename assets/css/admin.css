@@ -1,4 +1,58 @@
-#option-autoload-manager-modal {
+#options-autoload-manager_tabs {
+}
+#options-autoload-manager_tabs ul {
+    display: inline-flex;
+    gap: 20px;
+}
+#options-autoload-manager_tabs ul li {
+    border-bottom: 2px solid #ccc;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+#options-autoload-manager_tabs ul li.active {
+    border-bottom: 2px solid #448bff;
+}
+#options-autoload-manager_tabs a {
+    text-decoration: none;
+}
+#options-autoload-manager_help .options-autoload-manager-help-tab {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    background: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.options-autoload-manager-documentation {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.options-autoload-manager-help-heading a {
+    text-decoration: none;
+}
+.options-autoload-manager-help-heading a .dashicons {
+    margin-right: 5px;
+}
+#options-autoload-manager_help .options-autoload-manager-help-link {
+    display: block;
+    text-decoration: none;
+    background: #fff;
+    text-align: center;
+    width: 200px;
+    margin: 10px 0;
+    padding: 17px;
+    border-radius: 5px;
+    font-size: 17px;
+    color: #4256b2;
+    border: 1px solid #4256b2;
+    margin-bottom: 20px;
+    transition: .4s;
+}
+#options-autoload-manager_help .options-autoload-manager-help-link:hover {
+    background: #4256b2;
+    color: #fff;
+}
+#options-autoload-manager-modal {
     position: fixed;
     background: #c8c8c859;
     top: 0;
@@ -11,108 +65,22 @@
     justify-content: center;
     align-items: center;
 }
-#option-autoload-manager-modal-loader {
+#options-autoload-manager-modal-loader {
     position: absolute;
 }
-
-/* Switch CSS */
-.oam-switch {
-  position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 20px;
+#cx-row-options-autoload-manager_tools-report .cx-field-wrap {
+	position: relative;
 }
-
-.oam-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+#options-autoload-manager_report-copy {
+    position: absolute;
+    padding: 3px;
+    line-height: 0px;
+    right: 10px;
+    bottom: 20px;
 }
-
-.oam-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-  border-radius: 20px;
+#cx-posts {
+    list-style: inside;
 }
-
-.oam-slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
-}
-
-input:checked + .oam-slider {
-  background-color: #4CAF50;
-}
-
-input:checked + .oam-slider:before {
-  transform: translateX(20px);
-}
-
-/*Button Design*/
-.oam-filter-buttons {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.oam-filter {
-    background-color: #0073aa; /* WordPress Blue */
-    color: #fff;
-    padding: 10px 20px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.oam-filter:hover {
-    background-color: #005d8a; /* Darker blue on hover */
-    transform: translateY(-2px);
-}
-
-.oam-filter:active {
-    background-color: #004166; /* Even darker blue on click */
-    transform: translateY(0);
-}
-
-.oam-filter:focus {
-    outline: none; /* Remove focus outline */
-}
-
-.oam-filter.active {
-    background-color: #ffb900; /* WordPress Yellow */
-    color: #333;
-}
-.oam-bulk-update {
-    margin-bottom: 10px;
-}
-
-.oem-search-fleld{
-    margin-bottom: 10px;
-}
-.oem-search-fleld input{
-    margin-left: 10px;
-}
-
-/* Optional: Add media queries for responsive design */
-@media (max-width: 600px) {
-    .oam-filter {
-        width: 100%;
-        margin-bottom: 10px;
-        font-size: 14px;
-    }
+.options-autoload-manager_loader {
+    text-align: center;
 }

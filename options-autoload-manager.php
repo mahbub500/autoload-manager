@@ -1,19 +1,36 @@
 <?php
 /**
  * Plugin Name: Options Autoload Manager
- * Description: Any user can turn on or turn off auto load in option data
- * Plugin URI: https://wordpress.org/plugins/option-autoload-manager/
- * Author: Mahbub
- * Author URI: https://profiles.wordpress.org/mahbubmr500/
+ * Description: This is for opion autoload manager
+ * Plugin URI: https://codexpert.io
+ * Author: Codexpert, Inc
+ * Author URI: https://codexpert.io
  * Version: 0.9
- * Text Domain: option-autoload-manager
+ * Requires at least: 5.0
+ * Tested up to: 6.3
+ * Requires PHP: 7.4
+ * Text Domain: options-autoload-manager
  * Domain Path: /languages
- * License:           GPL v2 or later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Options_Autoload_manager is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * Options_Autoload_manager is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  */
 
-namespace Codexpert\Option_Autoload_Manager;
+namespace Codexpert\Options_Autoload_manager;
+
+use Codexpert\Plugin\Widget;
 use Codexpert\Plugin\Notice;
+use Pluggable\Plugin\License;
+use Pluggable\Marketing\Survey;
+use Pluggable\Marketing\Feature;
+use Pluggable\Marketing\Deactivator;
 
 /**
  * if accessed directly, exit.
@@ -25,9 +42,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Main class for the plugin
  * @package Plugin
- * @author Mahbub mahbubmr500@gmail.com
+ * @author Codexpert <hi@codexpert.io>
  */
 final class Plugin {
+	
+	/**
+	 * The Plugin
+	 * 
+	 * @access private
+	 */
+	private $plugin;
 	
 	/**
 	 * Plugin instance
@@ -46,6 +70,7 @@ final class Plugin {
 	 * @since 0.9
 	 */
 	private function __construct() {
+		
 		/**
 		 * Includes required files
 		 */
@@ -60,6 +85,11 @@ final class Plugin {
 		 * Runs actual hooks
 		 */
 		$this->hook();
+
+		/**
+		 * Plugin is loaded
+		 */
+		do_action( 'options-autoload-manager_loaded' );
 	}
 
 	/**
@@ -71,6 +101,7 @@ final class Plugin {
 	 * @uses psr-4
 	 */
 	private function include() {
+		require_once( dirname( __FILE__ ) . '/inc/functions.php' );
 		require_once( dirname( __FILE__ ) . '/vendor/autoload.php' );
 	}
 
@@ -89,10 +120,10 @@ final class Plugin {
 		 * 
 		 * @since 0.9
 		 */
-		define( 'OPTION_AUTOLOAD_MANAGER', __FILE__ );
-		define( 'OPTION_AUTOLOAD_MANAGER_DIR', dirname( OPTION_AUTOLOAD_MANAGER ) );
-		define( 'OPTION_AUTOLOAD_MANAGER_ASSET', plugins_url( 'assets', OPTION_AUTOLOAD_MANAGER ) );
-		define( 'OPTION_AUTOLOAD_MANAGER_DEBUG', apply_filters( 'option-autoload-manager_debug', true ) );
+		define( 'OPTIONS_AUTOLOAD_MANAGER_FILE', __FILE__ );
+		define( 'OPTIONS_AUTOLOAD_MANAGER_DIR', dirname( OPTIONS_AUTOLOAD_MANAGER_FILE ) );
+		define( 'OPTIONS_AUTOLOAD_MANAGER_ASSETS', plugins_url( 'assets', OPTIONS_AUTOLOAD_MANAGER_FILE ) );
+		define( 'OPTIONS_AUTOLOAD_MANAGER_DEBUG', apply_filters( 'options-autoload-manager_debug', true ) );
 
 		/**
 		 * The plugin data
@@ -100,14 +131,23 @@ final class Plugin {
 		 * @since 0.9
 		 * @var $plugin
 		 */
-		$this->plugin					= get_plugin_data( OPTION_AUTOLOAD_MANAGER );
-		$this->plugin['basename']		= plugin_basename( OPTION_AUTOLOAD_MANAGER );
-		$this->plugin['file']			= OPTION_AUTOLOAD_MANAGER;
-		$this->plugin['server']			= apply_filters( 'option-autoload-manager_server', 'https://codexpert.io/dashboard' );
-		$this->plugin['min_php']		= '5.6';
-		$this->plugin['min_wp']			= '4.0';
-		$this->plugin['icon']			= OPTION_AUTOLOAD_MANAGER_ASSET . '/img/icon.png';
+		$this->plugin					= get_plugin_data( OPTIONS_AUTOLOAD_MANAGER_FILE );
+		$this->plugin['basename']		= plugin_basename( OPTIONS_AUTOLOAD_MANAGER_FILE );
+		$this->plugin['file']			= OPTIONS_AUTOLOAD_MANAGER_FILE;
+		$this->plugin['doc_id']			= 1960;
+		$this->plugin['server']			= 'https://my.pluggable.io';
+		$this->plugin['icon']			= OPTIONS_AUTOLOAD_MANAGER_ASSETS . '/img/icon.png';
+		$this->plugin['depends']		= [ 'woocommerce/woocommerce.php' => __( 'WooCommerce', 'options-autoload-manager' ) ];
 		
+		/**
+		 * The license
+		 */
+		$this->plugin['license']		= new License( OPTIONS_AUTOLOAD_MANAGER_FILE );
+
+		/**
+		 * Set plugin data instance
+		 */
+		define( 'OPTIONS_AUTOLOAD_MANAGER', apply_filters( 'options-autoload-manager_instance', $this->plugin ) );
 	}
 
 	/**
@@ -130,40 +170,121 @@ final class Plugin {
 		if( is_admin() ) :
 
 			/**
+			 * The installer
+			 */
+			$installer = new App\Installer();
+			$installer->activate( 'install' );
+			$installer->deactivate( 'uninstall' );
+			$installer->action( 'admin_footer', 'update' );
+
+			/**
 			 * Admin facing hooks
 			 */
-			$admin = new App\Admin( $this->plugin );
-			$admin->activate( 'install' );
+			$admin = new App\Admin();
 			$admin->action( 'admin_footer', 'modal' );
 			$admin->action( 'plugins_loaded', 'i18n' );
+			$admin->action( 'admin_menu', 'admin_menu' );
 			$admin->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
+			$admin->filter( "plugin_action_links_{$this->plugin['basename']}", 'action_links' );
+			$admin->filter( 'plugin_row_meta', 'plugin_row_meta', 10, 2 );
+			$admin->action( 'save_post', 'update_cache', 10, 3 );
 			$admin->action( 'admin_footer_text', 'footer_text' );
+
+			/**
+			 * The setup wizard
+			 */
+			$wizard = new App\Wizard();
+			$wizard->action( 'plugins_loaded', 'render' );
+			$wizard->filter( "plugin_action_links_{$this->plugin['basename']}", 'action_links' );
 
 			/**
 			 * Settings related hooks
 			 */
-			$settings = new App\Settings( $this->plugin );
+			$settings = new App\Settings();
 			$settings->action( 'plugins_loaded', 'init_menu' );
 
+			/**
+			 * Blog posts from Codexpert blog
+			 * 
+			 * @package Codexpert\Plugin
+			 * 
+			 * @author Codexpert <hi@codexpert.io>
+			 */
+			$widget = new Widget();
+
+			/**
+			 * Renders different notices
+			 * 
+			 * @package Codexpert\Plugin
+			 * 
+			 * @author Codexpert <hi@codexpert.io>
+			 */
+			$notice = new Notice( $this->plugin );
+
+			/**
+			 * Asks to participate in a survey
+			 * 
+			 * @package Pluggable\Marketing
+			 * 
+			 * @author Pluggable <hi@pluggable.io>
+			 */
+			$survey = new Survey( OPTIONS_AUTOLOAD_MANAGER_FILE );
+
+			/**
+			 * Shows a popup window asking why a user is deactivating the plugin
+			 * 
+			 * @package Pluggable\Marketing
+			 * 
+			 * @author Pluggable <hi@pluggable.io>
+			 */
+			$deactivator = new Deactivator( OPTIONS_AUTOLOAD_MANAGER_FILE );
+
+			/**
+			 * Alters featured plugins
+			 * 
+			 * @package Pluggable\Marketing
+			 * 
+			 * @author Pluggable <hi@pluggable.io>
+			 */
+			$feature = new Feature( OPTIONS_AUTOLOAD_MANAGER_FILE );
 
 		else : // ! is_admin() ?
 
 			/**
 			 * Front facing hooks
 			 */
-			$front = new App\Front( $this->plugin );
+			$front = new App\Front();
 			$front->action( 'wp_head', 'head' );
 			$front->action( 'wp_footer', 'modal' );
-			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );			
+			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
+			$front->action( 'admin_bar_menu', 'add_admin_bar', 70 );
+
+			/**
+			 * Shortcode related hooks
+			 */
+			$shortcode = new App\Shortcode();
+			$shortcode->register( 'my-shortcode', 'my_shortcode' );
+
+			/**
+			 * Custom REST API related hooks
+			 */
+			$api = new App\API();
+			$api->action( 'rest_api_init', 'register_endpoints' );
 
 		endif;
 
 		/**
+		 * Common hooks
+		 *
+		 * Executes on both the admin area and front area
+		 */
+		$common = new App\Common();
+
+		/**
 		 * AJAX related hooks
 		 */
-		$ajax = new App\AJAX( $this->plugin );
-		$ajax->priv( 'update-autoload-status', 'change_autoload_status' );
-		$ajax->priv( 'oam-bulk-update', 'bulk_update' );
+		$ajax = new App\AJAX();
+		$ajax->priv( 'some-route', 'some_callback' );
 	}
 
 	/**

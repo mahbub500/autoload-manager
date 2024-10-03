@@ -6,14 +6,16 @@
         }
     ],
     "require": {
-        "codexpert/plugin": "dev-master"
+        "codexpert/plugin": "dev-master",
+        "pluggable/plugin": "dev-master",
+        "pluggable/marketing": "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "Codexpert\\Option_Autoload_Manager\\" : "classes/",
-            "Codexpert\\Option_Autoload_Manager\\App\\" : "app/",
-            "Codexpert\\Option_Autoload_Manager\\API\\" : "api/"
+            "Codexpert\\Options_Autoload_manager\\" : "classes/",
+            "Codexpert\\Options_Autoload_manager\\App\\" : "app/",
+            "Codexpert\\Options_Autoload_manager\\API\\" : "api/"
         },
-        "files": [ "inc/functions.php" ]
+        "files": []
     }
 }

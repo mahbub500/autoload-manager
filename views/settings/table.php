@@ -1,86 +1,36 @@
-<?php 
+<?php
+use Codexpert\Plugin\Table;
 
-use Codexpert\Option_Autoload_Manager\Helper;
-global $wpdb;
+$config = [
+	'per_page'		=> 5,
+	'columns'		=> [
+		'id'				=> __( 'Order #', 'options-autoload-manager' ),
+		'products'			=> __( 'Products', 'options-autoload-manager' ),
+		'order_total'		=> __( 'Order Total', 'options-autoload-manager' ),
+		'commission'		=> __( 'Commission', 'options-autoload-manager' ),
+		'payment_status'	=> __( 'Payment Status', 'options-autoload-manager' ),
+		'time'				=> __( 'Time', 'options-autoload-manager' ),
+	],
+	'sortable'		=> [ 'visit', 'id', 'products', 'commission', 'payment_status', 'time' ],
+	'orderby'		=> 'time',
+	'order'			=> 'desc',
+	'data'			=> [
+		[ 'id' => 345, 'products' => 'Abc', 'order_total' => '$678', 'commission' => '$98', 'payment_status' => 'Unpaid', 'time' => '2020-06-29' ],
+		[ 'id' => 567, 'products' => 'Xyz', 'order_total' => '$178', 'commission' => '$18', 'payment_status' => 'Paid', 'time' => '2020-05-26' ],
+		[ 'id' => 451, 'products' => 'Mno', 'order_total' => '$124', 'commission' => '$12', 'payment_status' => 'Paid', 'time' => '2020-07-01' ],
+		[ 'id' => 588, 'products' => 'Uji', 'order_total' => '$523', 'commission' => '$22', 'payment_status' => 'Pending', 'time' => '2020-07-02' ],
+		[ 'id' => 426, 'products' => 'Rim', 'order_total' => '$889', 'commission' => '$33', 'payment_status' => 'Paid', 'time' => '2020-08-01' ],
+		[ 'id' => 109, 'products' => 'Rio', 'order_total' => '$211', 'commission' => '$11', 'payment_status' => 'Unpaid', 'time' => '2020-08-12' ],
+	],
+	'bulk_actions'	=> [
+		'delete'	=> __( 'Delete', 'options-autoload-manager' ),
+		'draft'		=> __( 'Draft', 'options-autoload-manager' ),
+	],
+];
 
-$table_name = $wpdb->prefix . 'options';
-
-$transient_key = 'cached_options_data';
-$expiration_time = 12 * HOUR_IN_SECONDS; 
-
-$results = get_transient( $transient_key );
-
-if ( $results === false ) {
-    $query = "SELECT * FROM $table_name";
-    $results = $wpdb->get_results($query);
-
-    set_transient($transient_key, $results, $expiration_time);
-}
-
-if ($results) {
-    echo '<div >';
-
-    // Add Filter Buttons
-    echo '<div class="oam-filter-buttons">';
-    echo '<button type="button" class="oam-filter" data-filter="all">' . __( 'All', 'option-autoload-manager' ) . '</button>';
-    echo '<button type="button" class="oam-filter" data-filter="on">' . __( 'On', 'option-autoload-manager' ) . '</button>';
-    echo '<button type="button" class="oam-filter" data-filter="off">' . __( 'Off', 'option-autoload-manager' ) . '</button>';
-    echo '</div>';
-    // Add Bulk OFF Button
-
-    echo '<div class="oem-search-fleld">';
-    echo '<button type="submit" name="bulk_update" class="button button-primary oam-bulk-update">Bulk OFF</button>';
-    echo '<input id="oem-search" type="text" placeholder="Search..">';
-
-    echo '</div>';
-    
-    echo '<form class="oam-form" method="post">';
-    echo '<table id="oam-container" class="wp-list-table widefat fixed striped">';
-    echo '<thead>';
-    echo '<tr>';
-    echo '<th><input type="checkbox" id="select-all" /></th>'; // Select All Checkbox
-    echo '<th>' . __( 'Option ID', 'option-autoload-manager' ) . '</th>';
-    echo '<th>' . __( 'Option Name', 'option-autoload-manager' ) . '</th>';
-    echo '<th>' . __( 'Option Value', 'option-autoload-manager' ) . '</th>';
-    echo '<th>' . __( 'Autoload Status', 'option-autoload-manager' ) . '</th>';
-    echo '<th>' . __( 'Action', 'option-autoload-manager' ) . '</th>';
-    echo '</tr>';
-    echo '</thead>';
-    echo '<tbody id="table-body">';
-
-    foreach ($results as $row) {
-        $switch_name = 'switch_' . esc_html($row->option_id);
-        $autoload_status = esc_html($row->autoload);
-        $checked = ($autoload_status === 'on' || $autoload_status === 'auto') ? 'checked' : '';
-
-        $css = ($autoload_status == 'on' || $autoload_status == 'auto') ? 'oam-status-on' : 'oam-status-off';
-
-        echo '<tr class="oam-id ' . $css . '" data-id="' . esc_html($row->option_id) . '">';
-        echo '<td><input type="checkbox" class="select-row" name="switches[' . esc_html($row->option_id) . ']" value="1" ></td>'; // Individual Checkbox
-        echo '<td>' . esc_html($row->option_id) . '</td>';
-        echo '<td>' . esc_html(substr($row->option_name, 0, 20)) . '</td>';
-        echo '<td>' . esc_html(substr($row->option_value, 0, 20)) . '</td>';
-        echo '<td class="oam-autoload_status">' . esc_html($autoload_status) . '</td>';
-        echo '<td>
-                <label class="oam-switch">
-                    <input type="checkbox" class="oam-checkbox" name="switches[' . esc_html($row->option_id) . ']" value="1" ' . $checked . '>
-                    <span class="oam-slider oam-round"></span>
-                </label>
-              </td>';
-        echo '</tr>';
-    }
-
-    echo '</tbody>';
-    echo '</table>';
-
- echo ' <div id="pagination-container"></div>';
-    
-    // Add Bulk OFF Button
-    echo '<button type="submit" name="bulk_update" class="button button-primary oam-bulk-update">Bulk OFF</button>';
-
-    echo '</form>';
-    echo '</div>';
-} else {
-    echo 'No data found!';
-}
-?>
+$table = new Table( $config );
+echo '<form method="post">';
+$table->prepare_items();
+$table->search_box( 'Search', 'search' );
+$table->display();
+echo '</form>';

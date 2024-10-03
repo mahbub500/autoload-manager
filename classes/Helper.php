@@ -1,8 +1,5 @@
 <?php
-/**
- * All helpers functions
- */
-namespace Codexpert\Option_Autoload_Manager;
+namespace Codexpert\Options_Autoload_manager;
 
 /**
  * if accessed directly, exit.
@@ -14,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage Helper
- * @author Mahbub mahbubmr500@gmail.com
+ * @author Codexpert <hi@codexpert.io>
  */
 class Helper {
 
@@ -71,6 +68,24 @@ class Helper {
 		return apply_filters( 'oam_get_posts', $posts, $_args );
 	}
 
+	public static function get_terms( $args = [], $full = false ) {
+
+		$defaults = [
+			'taxonomy'		=> 'category',
+			'hide_empty'	=> false,
+		];
+
+		$args = wp_parse_args( $args, $defaults );
+
+		$terms = get_terms( $args );
+
+		if( false === $full ) {
+			return wp_list_pluck( $terms, 'name', 'term_id' );
+		}
+
+		return $terms;
+	}
+
 	public static function get_option( $key, $section, $default = '', $repeater = false ) {
 
 		$options = get_option( $key );
@@ -100,9 +115,9 @@ class Helper {
 	/**
 	 * Includes a template file resides in /views diretory
 	 *
-	 * It'll look into /option-autoload-manager directory of your active theme
+	 * It'll look into /options-autoload-manager directory of your active theme
 	 * first. if not found, default template will be used.
-	 * can be overwriten with option-autoload-manager_template_overwrite_dir hook
+	 * can be overwriten with options-autoload-manager_template_overwrite_dir hook
 	 *
 	 * @param string $slug slug of template. Ex: template-slug.php
 	 * @param string $sub_dir sub-directory under base directory
@@ -111,10 +126,10 @@ class Helper {
 	public static function get_template( $slug, $base = 'views', $args = null ) {
 
 		// templates can be placed in this directory
-		$overwrite_template_dir = apply_filters( 'oam_template_overwrite_dir', get_stylesheet_directory() . '/option-autoload-manager/', $slug, $base, $args );
+		$overwrite_template_dir = apply_filters( 'oam_template_overwrite_dir', get_stylesheet_directory() . '/options-autoload-manager/', $slug, $base, $args );
 		
 		// default template directory
-		$plugin_template_dir = dirname( OPTION_AUTOLOAD_MANAGER ) . "/{$base}/";
+		$plugin_template_dir = OPTIONS_AUTOLOAD_MANAGER_DIR . "/{$base}/";
 
 		// full path of a template file in plugin directory
 		$plugin_template_path =  $plugin_template_dir . $slug . '.php';
@@ -135,7 +150,7 @@ class Helper {
 			return ob_get_clean();
 		}
 		else {
-			return __( 'Template not found!', 'option-autoload-manager' );
+			return __( 'Template not found!', 'options-autoload-manager' );
 		}
 	}
 }
