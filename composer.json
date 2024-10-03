@@ -1,12 +1,12 @@
 {
     "authors": [
         {
-            "name": "WPpluginhub",
-            "email": "hi@codexpert.io"
+            "name": "Mahbub",
+            "email": "mahbubmr500@gmail.com"
         }
     ],
     "require": {
-        "codexpert/plugin": "dev-master"
+        "wppluginhub/plugin": "dev-master"
     },
     "autoload": {
         "psr-4": {
