@@ -2,9 +2,9 @@
 /**
  * All admin facing functions
  */
-namespace Codexpert\Option_Autoload_Manager\App;
-use Codexpert\Plugin\Base;
-use Codexpert\Plugin\Metabox;
+namespace WPpluginhub\Option_Autoload_Manager\App;
+use WPpluginhub\Plugin\Base;
+use WPpluginhub\Plugin\Metabox;
 
 /**
  * if accessed directly, exit.
@@ -80,7 +80,7 @@ class Admin extends Base {
 	public function footer_text( $text ) {
 		if( get_current_screen()->parent_base != $this->slug ) return $text;
 
-		return sprintf( __( 'Built with %1$s by the folks at <a href="%2$s" target="_blank">Codexpert, Inc</a>.' ), '&hearts;', 'https://codexpert.io' );
+		return sprintf( __( 'Built with %1$s by the folks at <a href="%2$s" target="_blank">WPpluginhub, Inc</a>.' ), '&hearts;', 'https://codexpert.io' );
 	}
 
 	public function modal() {

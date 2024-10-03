@@ -12,8 +12,8 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  */
 
-namespace Codexpert\Option_Autoload_Manager;
-use Codexpert\Plugin\Notice;
+namespace WPpluginhub\Option_Autoload_Manager;
+use WPpluginhub\Plugin\Notice;
 
 /**
  * if accessed directly, exit.

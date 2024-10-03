@@ -1,7 +1,7 @@
 {
     "authors": [
         {
-            "name": "Codexpert",
+            "name": "WPpluginhub",
             "email": "hi@codexpert.io"
         }
     ],
@@ -10,9 +10,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Codexpert\\Option_Autoload_Manager\\" : "classes/",
-            "Codexpert\\Option_Autoload_Manager\\App\\" : "app/",
-            "Codexpert\\Option_Autoload_Manager\\API\\" : "api/"
+            "WPpluginhub\\Option_Autoload_Manager\\" : "classes/",
+            "WPpluginhub\\Option_Autoload_Manager\\App\\" : "app/",
+            "WPpluginhub\\Option_Autoload_Manager\\API\\" : "api/"
         },
         "files": [ "inc/functions.php" ]
     }

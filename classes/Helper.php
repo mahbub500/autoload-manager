@@ -2,7 +2,7 @@
 /**
  * All helpers functions
  */
-namespace Codexpert\Option_Autoload_Manager;
+namespace WPpluginhub\Option_Autoload_Manager;
 
 /**
  * if accessed directly, exit.

@@ -1,6 +1,6 @@
 <?php 
 
-use Codexpert\Option_Autoload_Manager\Helper;
+use WPpluginhub\Option_Autoload_Manager\Helper;
 global $wpdb;
 
 $table_name = $wpdb->prefix . 'options';

@@ -2,8 +2,8 @@
 /**
  * All AJAX related functions
  */
-namespace Codexpert\Option_Autoload_Manager\App;
-use Codexpert\Plugin\Base;
+namespace WPpluginhub\Option_Autoload_Manager\App;
+use WPpluginhub\Plugin\Base;
 
 /**
  * if accessed directly, exit.
