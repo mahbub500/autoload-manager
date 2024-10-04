@@ -13,7 +13,7 @@
  */
 
 namespace WPpluginhub\Option_Autoload_Manager;
-use WPpluginhub\Plugin\Notice;
+use Codexpert\Plugin\Notice;
 
 /**
  * if accessed directly, exit.

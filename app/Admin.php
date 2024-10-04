@@ -3,8 +3,8 @@
  * All admin facing functions
  */
 namespace WPpluginhub\Option_Autoload_Manager\App;
-use WPpluginhub\Plugin\Base;
-use WPpluginhub\Plugin\Metabox;
+use Codexpert\Plugin\Base;
+use Codexpert\Plugin\Metabox;
 
 /**
  * if accessed directly, exit.
