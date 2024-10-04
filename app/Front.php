@@ -3,8 +3,8 @@
  * All public facing functions
  */
 namespace WPpluginhub\Option_Autoload_Manager\App;
-use Codexpert\Plugin\Base;
-use Codexpert\Option_Autoload_Manager\Helper;
+use WpPluginHub\Plugin\Base;
+use WpPluginHub\Option_Autoload_Manager\Helper;
 /**
  * if accessed directly, exit.
  */

@@ -4,8 +4,8 @@
  */
 namespace WPpluginhub\Option_Autoload_Manager\App;
 use WPpluginhub\Option_Autoload_Manager\Helper;
-use Codexpert\Plugin\Base;
-use Codexpert\Plugin\Settings as Settings_API;
+use WpPluginHub\Plugin\Base;
+use WpPluginHub\Plugin\Settings as Settings_API;
 
 /**
  * @package Plugin
